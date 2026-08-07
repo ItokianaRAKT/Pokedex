@@ -3,6 +3,7 @@ import PokemonCard from "./components/PokemonCard";
 
 function App() {
     const [pokemons, setPokemons] = useState([]);
+    const [scrolled, setScrolled] = useState(false);
 
     const limit = 100;
 
@@ -40,19 +41,32 @@ function App() {
         fetchPokemons();
     }, []);
 
-    return (
-        <main>
-            <h1>Pokédex</h1>
+    useEffect(() => {
+        function onScroll() {
+            setScrolled(window.scrollY > 0);
+        }
 
-            <div className="pokemon-grid">
-                {pokemons.map((pokemon) => (
-                    <PokemonCard
-                        key={pokemon.id}
-                        pokemon={pokemon}
-                    />
-                ))}
-            </div>
-        </main>
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
+    return (
+        <>
+            <header className={`topbar${scrolled ? " scrolled" : ""}`}>
+                <h1>Pokédex</h1>
+            </header>
+
+            <main>
+                <div className="pokemon-grid">
+                    {pokemons.map((pokemon) => (
+                        <PokemonCard
+                            key={pokemon.id}
+                            pokemon={pokemon}
+                        />
+                    ))}
+                </div>
+            </main>
+        </>
     );
 }
 
