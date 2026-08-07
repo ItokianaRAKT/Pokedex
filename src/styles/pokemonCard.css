@@ -140,8 +140,9 @@
 
     background: linear-gradient(
         145deg,
-        #e8f7ff,
-        #d8edff
+        color-mix(in srgb, var(--type1) 30%, white),
+        var(--type1) 45%,
+        var(--type2)
     );
 
     overflow: hidden;
@@ -270,7 +271,7 @@
 
     border-radius: 999px;
 
-    background: linear-gradient(90deg, #7aa8ff, #5b7cfa);
+    background: linear-gradient(90deg, var(--stat-light), var(--stat-dark));
 
     transition: width 0.6s ease 0.15s;
 }
