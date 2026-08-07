@@ -1,11 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
-/* =========================
-   GRILLE
-   ========================= */
-
 .pokemon-grid {
     width: 100%;
     max-width: 1400px;
@@ -24,17 +16,59 @@
 }
 
 
-/* =========================
-   CARTE
-   ========================= */
 
-.pokemon-card {
+
+.flip-card {
     position: relative;
 
     width: 100%;
     min-width: 0;
 
-    padding: 18px;
+    border: none;
+    padding: 0;
+
+    background: none;
+
+    cursor: pointer;
+
+    perspective: 1200px;
+
+    outline: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.flip-card:focus-visible {
+    outline: 3px solid rgba(91, 124, 250, 0.6);
+    outline-offset: 3px;
+
+    border-radius: 24px;
+}
+
+.flip-card:not(.flipped):hover {
+    transform: translateY(-8px);
+}
+
+.flip-card-inner {
+    position: relative;
+
+    width: 100%;
+
+    transform-style: preserve-3d;
+
+    transition: transform 0.6s ease;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 
     border-radius: 24px;
 
@@ -49,17 +83,33 @@
 
     overflow: hidden;
 
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease;
 }
 
-.pokemon-card:hover {
-    transform: translateY(-8px) rotate(1deg);
-
+.flip-card:not(.flipped):hover .card-front {
     box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.18);
 }
+
+.card-front {
+    position: relative;
+
+    padding: 18px;
+}
+
+.card-back {
+    position: absolute;
+
+    inset: 0;
+
+    padding: 18px;
+
+    transform: rotateY(180deg);
+
+    display: flex;
+    flex-direction: column;
+}
+
 
 
 
@@ -74,8 +124,6 @@
 
     color: rgba(0, 0, 0, 0.35);
 }
-
-
 
 .pokemon-image {
     display: flex;
@@ -97,6 +145,8 @@
     );
 
     overflow: hidden;
+
+    pointer-events: none;
 }
 
 .pokemon-image img {
@@ -108,12 +158,9 @@
     transition: transform 0.3s ease;
 }
 
-.pokemon-card:hover .pokemon-image img {
+.flip-card:not(.flipped):hover .pokemon-image img {
     transform: scale(1.12);
 }
-
-
-
 
 .pokemon-info {
     text-align: center;
@@ -131,9 +178,6 @@
 
     overflow-wrap: anywhere;
 }
-
-
-
 
 .pokemon-types {
     display: flex;
@@ -158,6 +202,133 @@
 
     box-shadow:
         0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+.back-name {
+    margin: 0 0 14px;
+
+    font-size: 1.1rem;
+    font-weight: 800;
+
+    text-transform: capitalize;
+
+    color: #252525;
+
+    text-align: center;
+}
+
+.back-stats {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    gap: 9px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    width: 62px;
+
+    flex-shrink: 0;
+
+    text-align: right;
+
+    text-transform: capitalize;
+
+    color: #555;
+}
+
+.stat-bar {
+    flex: 1;
+
+    height: 8px;
+
+    border-radius: 999px;
+
+    background: #e6e8f0;
+
+    overflow: hidden;
+}
+
+.stat-fill {
+    height: 100%;
+
+    width: 0;
+
+    border-radius: 999px;
+
+    background: linear-gradient(90deg, #7aa8ff, #5b7cfa);
+
+    transition: width 0.6s ease 0.15s;
+}
+
+.stat-value {
+    width: 28px;
+
+    flex-shrink: 0;
+
+    font-variant-numeric: tabular-nums;
+
+    text-align: right;
+
+    color: #252525;
+}
+
+.back-measures {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 16px;
+}
+
+.measure {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 3px;
+
+    padding: 9px 10px;
+
+    border-radius: 14px;
+
+    background: #eef1f8;
+
+    font-size: 0.68rem;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+    color: #777;
+}
+
+.measure strong {
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    text-transform: none;
+
+    letter-spacing: 0;
+
+    color: #252525;
 }
 
 
@@ -238,6 +409,7 @@
 
 
 
+
 @media (max-width: 700px) {
 
     .pokemon-grid {
@@ -245,13 +417,12 @@
         gap: 20px;
     }
 
-    .pokemon-card {
+    .card-front,
+    .card-back {
         padding: 15px;
     }
 
 }
-
-
 
 @media (max-width: 480px) {
 
@@ -260,7 +431,8 @@
         gap: 18px;
     }
 
-    .pokemon-card {
+    .card-front,
+    .card-back {
         padding: 14px;
 
         border-radius: 20px;
@@ -280,6 +452,14 @@
     .type {
         padding: 5px 11px;
         font-size: 0.7rem;
+    }
+
+    .stat-row {
+        gap: 6px;
+    }
+
+    .stat-label {
+        width: 56px;
     }
 
 }
