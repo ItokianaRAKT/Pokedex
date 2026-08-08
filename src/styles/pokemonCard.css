@@ -72,14 +72,10 @@
 
     border-radius: 24px;
 
-    background: linear-gradient(
-        145deg,
-        #ffffff,
-        #f4f4f8
-    );
+    background: var(--color-card);
 
     box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.12);
+        0 12px 30px var(--color-card-shadow);
 
     overflow: hidden;
 
@@ -88,13 +84,15 @@
 
 .flip-card:not(.flipped):hover .card-front {
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.18);
+        0 20px 40px var(--color-card-hover-shadow);
 }
 
 .card-front {
     position: relative;
 
     padding: 18px;
+
+    border: 2px solid color-mix(in srgb, var(--type1) 25%, white);
 }
 
 .card-back {
@@ -122,7 +120,7 @@
     font-size: 0.85rem;
     font-weight: 800;
 
-    color: rgba(0, 0, 0, 0.35);
+    color: var(--color-pokemon-number);
 }
 
 .pokemon-image {
@@ -139,11 +137,12 @@
     border-radius: 20px;
 
     background: linear-gradient(
-        145deg,
-        color-mix(in srgb, var(--type1) 30%, white),
-        var(--type1) 45%,
-        var(--type2)
+        135deg,
+        color-mix(in srgb, var(--type1) 40%, white),
+        var(--type1)
     );
+
+    border: 2px solid color-mix(in srgb, var(--type1) 85%, white);
 
     overflow: hidden;
 
@@ -175,7 +174,7 @@
 
     text-transform: capitalize;
 
-    color: #252525;
+    color: var(--color-pokemon-name);
 
     overflow-wrap: anywhere;
 }
@@ -216,7 +215,7 @@
 
     text-transform: capitalize;
 
-    color: #252525;
+    color: var(--color-pokemon-name);
 
     text-align: center;
 }
@@ -249,7 +248,7 @@
 
     text-transform: capitalize;
 
-    color: #555;
+    color: var(--color-stat-label);
 }
 
 .stat-bar {
@@ -259,7 +258,7 @@
 
     border-radius: 999px;
 
-    background: #e6e8f0;
+    background: var(--color-stat-track);
 
     overflow: hidden;
 }
@@ -285,7 +284,7 @@
 
     text-align: right;
 
-    color: #252525;
+    color: var(--color-stat-value);
 }
 
 .back-measures {
@@ -309,7 +308,7 @@
 
     border-radius: 14px;
 
-    background: #eef1f8;
+    background: var(--color-measure-bg);
 
     font-size: 0.68rem;
     font-weight: 800;
@@ -318,7 +317,7 @@
 
     letter-spacing: 0.05em;
 
-    color: #777;
+    color: var(--color-measure-text);
 }
 
 .measure strong {
@@ -329,7 +328,7 @@
 
     letter-spacing: 0;
 
-    color: #252525;
+    color: var(--color-measure-strong);
 }
 
 

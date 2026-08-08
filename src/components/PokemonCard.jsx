@@ -77,8 +77,7 @@ function PokemonCard({ pokemon }) {
                     <div
                         className="pokemon-image"
                         style={{
-                            "--type1": TYPE_COLORS[pokemon.types[0]] ?? FALLBACK_TYPE_COLOR,
-                            "--type2": TYPE_COLORS[pokemon.types[1]] ?? FALLBACK_TYPE_COLOR
+                            "--type1": TYPE_COLORS[pokemon.types[0]] ?? FALLBACK_TYPE_COLOR
                         }}
                     >
                         <img
