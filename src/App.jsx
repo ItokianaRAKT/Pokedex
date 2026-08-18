@@ -4,11 +4,12 @@ import { usePokemons } from "./hooks/usePokemons";
 import MoonIcon from "./components/icons/MoonIcon";
 import SunIcon from "./components/icons/SunIcon";
 import PokemonCard from "./components/PokemonCard";
+import Loader from "./components/Loader";
 
 function App() {
     const { dark, setDark } = useTheme();
     const scrolled = useScroll();
-    const pokemons = usePokemons();
+    const { pokemons, loading } = usePokemons();
 
     return (
         <>
@@ -24,14 +25,18 @@ function App() {
                 </button>
             </header>
             <main>
-                <div className="pokemon-grid">
-                    {pokemons.map((pokemon) => (
-                        <PokemonCard
-                            key={pokemon.id}
-                            pokemon={pokemon}
-                        />
-                    ))}
-                </div>
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <div className="pokemon-grid">
+                        {pokemons.map((pokemon) => (
+                            <PokemonCard
+                                key={pokemon.id}
+                                pokemon={pokemon}
+                            />
+                        ))}
+                    </div>
+                )}
             </main>
         </>
     );
