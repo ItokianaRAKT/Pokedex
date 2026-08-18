@@ -3,10 +3,14 @@ import { fetchPokemonList } from "../api/pokemonApi";
 
 export function usePokemons() {
     const [pokemons, setPokemons] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchPokemonList().then(setPokemons);
+        fetchPokemonList().then((data) => {
+            setPokemons(data);
+            setLoading(false);
+        });
     }, []);
 
-    return pokemons;
+    return { pokemons, loading };
 }
